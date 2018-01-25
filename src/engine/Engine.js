@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import { Route, Switch } from 'react-router-dom'
 import { Layout } from 'antd'
 
@@ -15,12 +16,20 @@ import styles from './Engine.less'
 const { Content } = Layout
 
 class Engine extends Component {
+	static propTypes = {
+		location: PropTypes.object.isRequired
+	}
+
+	static contextTypes = {
+    router: PropTypes.object.isRequired,
+  }
+
 	render() {
 		return (
 			<Layout>
 				<Header />
 				<Layout>
-					<SideMenu />
+					<SideMenu location={this.props.location} />
 					<Layout className={styles.wrap}>
 						<BreadCrumb />
 						<Content className={styles.content}>

@@ -1,3 +1,8 @@
+/*
+* sideMenus
+* 一个N层嵌套的Json Array
+* @key isRequired
+*/
 const menus = [
 	{
 		title: '机构信息',
