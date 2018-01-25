@@ -1,16 +1,26 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Breadcrumb } from 'antd'
 
-class BreadCrumb extends Component {
-	render() {
-		return (
-			<Breadcrumb style={{ margin: '16px 0' }}>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-        <Breadcrumb.Item>List</Breadcrumb.Item>
-        <Breadcrumb.Item>App</Breadcrumb.Item>
-      </Breadcrumb>
-		)
-	}
+import { breadcrumbMap } from '../../router/menus'
+
+// eslint-disable-next-line
+function BreadcrumbNav({ pathname }) {
+  const pathSnippets = pathname.split('/').filter(i => i)
+  return (
+    <Breadcrumb style={{ margin: '16px 0' }}>
+      {
+        pathSnippets.map((_, index) => {
+          const url = `/${pathSnippets.slice(0, index + 1).join('/')}`
+          return (
+            <Breadcrumb.Item key={url}>
+              {breadcrumbMap[url]}
+            </Breadcrumb.Item>
+          )
+        })
+      }
+    </Breadcrumb>
+  )
 }
 
-export default BreadCrumb
+export default BreadcrumbNav
+

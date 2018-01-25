@@ -1,8 +1,8 @@
 export default {
 	INDEX: '/',
 
-	ORG: '/app/org',
-	ORG_1: '/app/org/org1',
+	ORG: '/org/info1/info-1',
+	ORG_1: '/org/info2',
 
-	ACCOUNT: '/app/account'
+	ACCOUNT: '/account'
 }

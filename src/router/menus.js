@@ -1,37 +1,57 @@
 /*
 * sideMenus
 * 一个N层嵌套的Json Array
-* @key isRequired
+* @path isRequired unique
 */
 const menus = [
 	{
 		title: '机构信息',
-		key: 'org.1',
+		path: '/org',
 		icon: '',
 		children: [
 			{
 				title: '机构信息1',
-				key: 'org.1.1',
+				path: '/org/info1',
+				icon: '',
 				children: [
 				 	{
 				 		title: '机构信息1-1',
-				 		key: 'org.1.1.1',
-				 		path: '/app/org/org1'
+				 		path: '/org/info1/info-1',
+				 		icon: ''
 				 	}
 				]
 			}, {
 				title: '机构信息2',
-				key: 'org.1.2',
-				path: '/app/org'
+				path: '/org/info2',
+				icon: ''
 			}
 		]
 	}, 
 	{
 		title: '账号管理',
-		key: 'account.1',
-		path: '/app/account',
+		path: '/account',
 		icon: ''
 	}
 ]
+
+function mapToBreadcrumb(menus) {
+  let ret = {}
+  menus.forEach(item => {
+    if (item.children) {
+      ret = {
+        [item.path]: item.title,
+        ...ret,
+        ...mapToBreadcrumb(item.children),
+      }
+    } else {
+      ret[item.path] = item.title
+    }
+  })
+  return ret
+}
+
+const breadcrumbMap = mapToBreadcrumb(menus)
+
+export { breadcrumbMap }
 
 export default menus

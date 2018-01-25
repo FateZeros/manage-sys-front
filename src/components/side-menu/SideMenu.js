@@ -47,6 +47,32 @@ class SideMenu extends Component {
     })
   }
 
+  /**
+	*  梳理Menu的数据结构
+	*  将N层嵌套改造成深度为1的Array，添加parentKeys: Array字段
+	**/
+	handleMenusData = menus => {
+		let newMenus = menus.concat([])
+		let len = newMenus.length
+		const parentKeys = []
+		for (let i = 0; i < len; i ++) {
+			const menu = newMenus[i]
+			if (menu.children && menu.children.length !== 0) {
+				const childMenu = menu.children
+				for (let j = 0; j < childMenu.length; j ++) {
+					if (menu.parentKeys) {
+						childMenu[j].parentKeys = menu.parentKeys.concat([menu.path])
+					} else {
+						childMenu[j].parentKeys = [menu.path]
+					}
+					newMenus[len + j] = childMenu[j]
+				}
+				len = newMenus.length
+			}
+		}
+		return newMenus
+	}
+
   /*
   * 激活选中的SideMenu
   */
@@ -73,32 +99,6 @@ class SideMenu extends Component {
 		return openKeys
 	}
 
-	/**
-	*  梳理Menu的数据结构
-	*  将N层嵌套改造成深度为1的Array，添加parentKeys: Array字段
-	**/
-	handleMenusData = menus => {
-		let newMenus = menus.concat([])
-		let len = newMenus.length
-		const parentKeys = []
-		for (let i = 0; i < len; i ++) {
-			const menu = newMenus[i]
-			if (menu.children && menu.children.length !== 0) {
-				const childMenu = menu.children
-				for (let j = 0; j < childMenu.length; j ++) {
-					if (menu.parentKeys) {
-						childMenu[j].parentKeys = menu.parentKeys.concat([menu.key])
-					} else {
-						childMenu[j].parentKeys = [menu.key]
-					}
-					newMenus[len + j] = childMenu[j]
-				}
-				len = newMenus.length
-			}
-		}
-		return newMenus
-	}
-
   handleMenuChange = menu => {
   	const { key } = menu
   	this.setState({
@@ -116,13 +116,13 @@ class SideMenu extends Component {
 		return menus.map(menu => {
 			if (menu.children) {
 				return (
-					<SubMenu key={menu.key} title={menu.title}>
+					<SubMenu key={menu.path} title={menu.title}>
 						{this.renderSubMenu(menu.children)}
 					</SubMenu>
 				)
 			}
 			return (
-				<Menu.Item key={menu.path || menu.key}>
+				<Menu.Item key={menu.path}>
 					{ menu.path ? <Link to={menu.path}>{menu.title}</Link> : menu.title}
 				</Menu.Item>
 			)

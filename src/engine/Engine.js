@@ -31,7 +31,7 @@ class Engine extends Component {
 				<Layout>
 					<SideMenu location={this.props.location} />
 					<Layout className={styles.wrap}>
-						<BreadCrumb />
+						<BreadCrumb pathname={this.props.location.pathname} />
 						<Content className={styles.content}>
 		          <Switch>
 		          	<Route path={router.ORG} component={Org}></Route>
