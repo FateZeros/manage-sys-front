@@ -21,3 +21,6 @@ yarn-debug.log*
 yarn-error.log*
 
 REMARD.md
+
+# 项目代码提交
+/api/server.api.js

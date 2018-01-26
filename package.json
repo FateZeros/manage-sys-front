@@ -5,6 +5,7 @@
   "dependencies": {
     "antd": "^3.1.4",
     "autoprefixer": "7.1.6",
+    "axios": "^0.17.1",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
     "babel-jest": "20.0.3",
@@ -41,6 +42,7 @@
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "redux": "^3.7.2",
+    "redux-saga": "^0.16.0",
     "style-loader": "0.19.0",
     "sw-precache-webpack-plugin": "0.11.4",
     "url-loader": "0.6.2",
@@ -93,6 +95,12 @@
     "presets": [
       "react-app"
     ]
+  },
+  "proxy": {
+    "/": {
+      "target": "http://192.168.2.48:8021/",
+      "wx": true
+    }
   },
   "eslintConfig": {
     "extends": "react-app"

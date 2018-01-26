@@ -54,7 +54,6 @@ class SideMenu extends Component {
 	handleMenusData = menus => {
 		let newMenus = menus.concat([])
 		let len = newMenus.length
-		const parentKeys = []
 		for (let i = 0; i < len; i ++) {
 			const menu = newMenus[i]
 			if (menu.children && menu.children.length !== 0) {
