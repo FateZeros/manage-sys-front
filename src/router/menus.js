@@ -5,31 +5,44 @@
 */
 const menus = [
 	{
-		title: '机构信息',
-		path: '/org',
+		title: '首页',
+		path: '/home',
+		icon: ''
+	},
+	{
+		title: 'UI',
+		path: '/ui',
 		icon: '',
 		children: [
 			{
-				title: '机构信息1',
-				path: '/org/info1',
+				title: '按钮',
+				path: '/ui/button',
 				icon: '',
-				children: [
-				 	{
-				 		title: '机构信息1-1',
-				 		path: '/org/info1/info-1',
-				 		icon: ''
-				 	}
-				]
-			}, {
-				title: '机构信息2',
-				path: '/org/info2',
+			},
+			{
+				title: '富文本',
+				path: '/ui/rich-edit',
 				icon: ''
 			}
 		]
-	}, 
+	},
 	{
-		title: '账号管理',
-		path: '/account',
+		title: '表单',
+		path: '/form',
+		icon: ''
+	},
+	{
+		title: '表格',
+		path: '/table',
+		icon: ''
+	},
+	{
+		title: '图表',
+		path: '/charts'
+	},
+	{
+		title: '页面',
+		path: '/page',
 		icon: ''
 	}
 ]

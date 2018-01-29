@@ -1,4 +1,4 @@
-# 引入antd.css
+# 引入 antd.css
 
 ```bash
 npm install --save antd
@@ -8,12 +8,18 @@ import 'antd/dist/antd.css'
 
 ```
 
-# 引入redux
+# 引入 redux
 ```bash
 npm install --save redux react-redux
 ```
 
-# 引入redux-saga
+# 引入 redux-saga
 ```bash
 npm install --save redux-saga
 ```
+
+# 引入 reselector
+```bash
+npm install --save 
+```
+

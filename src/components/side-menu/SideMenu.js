@@ -1,13 +1,15 @@
 /**
  * 导航栏
  * @author YJF
+ * 功能：支持 router 的 menus 配置无限递归
+ * 后台管理系统一般的 menus 设计最多3层
  */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Menu, Layout } from 'antd'
 import { Link } from 'react-router-dom'
 
-import menus from '../../router/menus'
+import menus from 'src/router/menus'
 
 const { Sider } = Layout
 const { SubMenu } = Menu
@@ -40,7 +42,7 @@ class SideMenu extends Component {
     // 根据对应路由地址，激活对应的按钮和菜单
     this.context.router.history.listen(next => {
       const { pathname } = next
-      console.log(pathname)
+      // console.log(pathname)
       if (pathname !== '/') {
       	this.updateActiveSideMenu(pathname)
       }

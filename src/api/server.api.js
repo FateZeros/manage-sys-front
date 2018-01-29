@@ -1,4 +1,4 @@
-import makeRequest from './makeRequest'
+import makeRequest from 'src/utils/makeRequest'
 
 /**
  * 获取 项目中的各种类型列表

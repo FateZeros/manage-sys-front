@@ -1,7 +1,7 @@
 import React from 'react'
 import { Breadcrumb } from 'antd'
 
-import { breadcrumbMap } from '../../router/menus'
+import { breadcrumbMap } from 'src/router/menus'
 
 // eslint-disable-next-line
 function BreadcrumbNav({ pathname }) {
