@@ -27,8 +27,8 @@ class Engine extends Component {
 	}
 
 	static contextTypes = {
-    router: PropTypes.object.isRequired,
-  }
+		router: PropTypes.object.isRequired,
+	}
 
 	render() {
 		return (
@@ -40,13 +40,13 @@ class Engine extends Component {
 						<Layout className={styles.wrap}>
 							<BreadCrumb pathname={this.props.location.pathname} />
 							<Content className={styles.content}>
-			          <Switch>
-			          	<Route path={router.HOME} component={DashBoard} />
-			          	<Route path={router.FORM} component={Form} />
-			          	<Route path={router.TABLE} component={Table} />
-			          </Switch>
-			        </Content>
-		        </Layout>
+								<Switch>
+									<Route path={router.HOME} component={DashBoard} />
+									<Route path={router.FORM} component={Form} />
+									<Route path={router.TABLE} component={Table} />
+								</Switch>
+							</Content>
+						</Layout>
 					</Layout>
 				</Layout>
 			</LocaleProvider>

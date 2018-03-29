@@ -1,9 +1,9 @@
 import { injectReducer } from 'src/utils/store'
 import { fromJS } from 'immutable'
-import * as actions from './actions'
+// import * as actions from './actions'
 
 injectReducer({
-	namespace: 'engine',
+	namespace: 'table',
 
 	initialState: {
 		userInfo: {
@@ -13,6 +13,5 @@ injectReducer({
 	},
 	
 	actionHandlers: {
-		[actions.SET_USER]: (state, { userInfo }) => state.setUser('userInfo', fromJS(userInfo))
 	}
 })

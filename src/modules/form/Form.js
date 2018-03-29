@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import { Form } from 'antd'
 
+import './reducer'
+
 class FormPage extends Component {
 	render() {
 		return (
