@@ -17,7 +17,6 @@ import Form from 'src/modules/form'
 import Table from 'src/modules/table'
 
 import styles from './Engine.less'
-import './reducer'
 
 const { Content } = Layout
 

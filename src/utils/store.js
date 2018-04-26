@@ -1,20 +1,10 @@
-import { createStore, applyMiddleware, combineReducers, compose } from 'redux'
-import createSagaMiddleware from 'redux-saga'
+import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
-import Immutable from 'immutable'
+import createSagaMiddleware from 'redux-saga'
 
-// 创建 saga 中间件
 const sagaMiddleware = createSagaMiddleware()
-// 动态Reducer
-const asyncReducers = {}
-let store = null
-
-// 创建 root Reducer
-function createReducer(reducers) {
-	return combineReducers({
-		...reducers
-	})
-}
+const allSagas = []
+const allReducer = []
 
 export function initStore(initialState = {}) {
   const enhanceMiddleware = []
@@ -26,49 +16,24 @@ export function initStore(initialState = {}) {
       enhanceMiddleware.push(f => f)
     }
   }
-  const middleware = compose(applyMiddleware(sagaMiddleware, thunk), ...enhanceMiddleware)
-  const reducers = createReducer(asyncReducers)
-  store = createStore(reducers, initialState, middleware)
-  // store.runSaga = runSaga
+  const middleware = compose(
+    applyMiddleware(sagaMiddleware, thunk),
+    ...enhanceMiddleware
+  )
+  const reducers = combineReducers({
+    ...allReducer
+  })
+  const store = createStore(reducers, initialState, middleware)
+  allSagas.forEach(saga => {
+    sagaMiddleware.run(saga)
+  })
   return store
 }
 
-function injectAsyncReducer(name, reducer) {
-	if (asyncReducers[name]) {
-    return
-  }
-  asyncReducers[name] = reducer
-  if (store) {
-    store.replaceReducer(createReducer(reducer))
-  }
+export function injectSaga(saga) {
+  allSagas.push(saga)
 }
 
-/*
-* 动态创建 Reducer
-*/
-export function injectReducer({ namespace, initialState, actionHandlers }) {
-	console.log(namespace, initialState, actionHandlers)
-	const finallyState = Immutable.fromJS(initialState)
-	const finallyReducer = (state = finallyState, action) => {
-    if (action.type === `${namespace}/RESET`) {
-      // 重置redux
-      return finallyState
-    }
-    const reduceFn = actionHandlers[action.type]
-    if (!reduceFn) {
-      return state
-    }
-    return reduceFn(state, action)
-  }
-  injectAsyncReducer(namespace, finallyReducer)
+export function injectReducer(namespace, reducer) {
+  allReducer[namespace] = reducer
 }
-
-
-// 挂载 saga 中间件到 store
-// export const store = createStore(
-// 	rootReducer,
-// 	// applyMiddleware(sagaMiddleware)
-// )
-
-// 运行 saga
-// sagaMiddleware.run(rootSaga)
